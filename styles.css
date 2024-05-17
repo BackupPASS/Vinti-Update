@@ -50,7 +50,7 @@ body {
     background-color: #000;
     color: #fff;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 50px;
     margin-right: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     padding: 8px 15px; /* Adjust button padding */
@@ -265,3 +265,71 @@ color: #ffffff;
 .nav-button:hover {
     background-color: #333;
 }
+
+.cookie-card {
+    max-width: 320px;
+    padding: 1rem;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 20px 20px 30px rgba(0, 0, 0, .05);
+    display: none; /* Hide initially */
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 9999;
+  }
+  
+  .title {
+    font-weight: 600;
+    color: rgb(31 41 55);
+  }
+  
+  .description {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    line-height: 1.25rem;
+    color: rgb(75 85 99);
+  }
+  
+  .description a {
+    color: rgb(59 130 246);
+  }
+  
+  .description a:hover {
+    text-decoration: underline;
+  }
+  
+  .actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 1rem;
+  }
+  
+  .pref {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    color: rgb(31 41 55);
+    text-decoration: underline;
+    border: none;
+    background-color: transparent;
+  }
+  
+  .pref:hover {
+    color: rgb(156 163 175);
+  }
+  
+  .accept {
+    font-size: 0.75rem;
+    line-height: 1rem;
+    background-color: rgb(17 24 39);
+    font-weight: 500;
+    border-radius: 0.5rem;
+    color: #fff;
+    padding: 0.625rem 1rem;
+    border: none;
+  }
+  
+  .accept:hover {
+    background-color: rgb(55 65 81);
+  }
