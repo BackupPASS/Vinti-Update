@@ -1,10 +1,8 @@
 let currentIndex = 0;
 const images = [
-    'image1.jpg',
+
     'image2.jpg',
-    'image3.jpeg',
-    'image4.jpeg',
-    'image5.jpg',
+
 ];
 const slideshow = document.getElementById('background-slideshow');
 
@@ -51,3 +49,5 @@ setTimeout(function() {
 
 
   setTimeout(showCookieNotice, 1000);
+
+  document.cookie = "username=JohnDoe; path=/; secure; HttpOnly";
