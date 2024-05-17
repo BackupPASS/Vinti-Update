@@ -23,6 +23,7 @@ body {
     transition: all 0.3s ease;
 }
 
+
 .header {
     background-color: #000;
     color: #fff;
@@ -225,35 +226,6 @@ color: #ffffff;
     transition: opacity 1s ease-in-out;
 }
 
-#background-navigation {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 999;
-}
-
-
-#background-slideshow {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    background-size: cover; 
-    background-position: center; 
-    background-repeat: no-repeat; 
-    transition: opacity 1s ease-in-out;
-}
-
-#background-navigation {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 999;
-}
 
 
 
@@ -324,3 +296,5 @@ color: #ffffff;
   .accept:hover {
     background-color: rgb(55 65 81);
   }
+
+
