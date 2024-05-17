@@ -28,6 +28,8 @@ body {
     margin-top: 10%;
     font-size: 30px;
     transition: all 0.3s ease;
+    color: #fff;
+
 }
 
 .header h1 {
@@ -53,9 +55,9 @@ body {
     border-radius: 50px;
     margin-right: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    padding: 8px 15px; /* Adjust button padding */
-        font-size: 15px; /* Adjust button font size */
-    transition: all 0.3s ease; /* Added transition for smooth resizing */
+    padding: 8px 15px; 
+        font-size: 15px; 
+    transition: all 0.3s ease; 
     
 }
 
@@ -93,22 +95,22 @@ body {
 }
 
 
-/* Search box */
+
 .gsc-search-box {
-border: none; /* Remove border */
-border-radius: 20px; /* Increase border radius */
+border: none; 
+border-radius: 20px; 
 margin-left:7px;
 background-color: transparent;
 
 }
 
-/* Input box */
+
 .gsc-input-box {
-border: none; /* Remove border */
-border-radius: 20px; /* Increase border radius */
+border: none; 
+border-radius: 20px; 
 margin-left: 7px;
 box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-padding: 5px; /* Add padding */
+padding: 5px; 
 background-color: transparent;
 max-width: 100%;
 }
@@ -122,38 +124,38 @@ background-color: #fff;
 
 
 .gsc-webResult {
-border: none; /* Remove border around search results */
-background-color: transparent; /* Transparent background */
-padding: 10px; /* Add padding */
+border: none; 
+background-color: transparent; 
+padding: 10px; 
 }
 
 .gsc-results-wrapper-overlay {
-display: none !important; /* Hide overlay */
+display: none !important;
 background-color: transparent;
 }
 
 
 .gsc-webResult {
-border: 1px solid #dfdede; /* Add border around search results */
+border: 1px solid #dfdede;
 background-color: transparent;
-padding: 5px; /* Add padding */
-margin-bottom: 15px; /* Add margin between search results */
-border-radius: 15px; /* Add border radius */
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Add box shadow */
+padding: 5px; 
+margin-bottom: 15px; 
+border-radius: 15px; 
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 .gsc-url-top, .gsc-url-bottom {
-color: #1a0dab; /* Change link color */
+color: #1a0dab; 
 background-color: transparent;
 }
 
 .gsc-thumbnail-inside {
-display: none; /* Hide thumbnails inside search results */
+display: none;
 background-color: transparent;
 }
 
 .gsc-search-box .gsc-input-box {
-border: none !important; /* Remove border */
+border: none !important;
 background-color: transparent;
 }
 
@@ -175,12 +177,12 @@ color: #ffffff;
 
 @media screen and (max-width: 600px) {
     .container {
-        max-width: 90%; /* Adjusted for better mobile responsiveness */
+        max-width: 90%;
         padding: 10px;
     }
     .btn {
-        padding: 5px 4px; /* Adjust button padding */
-        font-size: 12px; /* Adjust button font size */
+        padding: 5px 4px;
+        font-size: 12px; 
     }
 .headertxt{
     font-size: 20px;
@@ -237,9 +239,9 @@ color: #ffffff;
     width: 100%;
     height: 100%;
     z-index: -1;
-    background-size: cover; /* Ensure the background image covers the entire container */
-    background-position: center; /* Center the background image */
-    background-repeat: no-repeat; /* Prevent the background image from repeating */
+    background-size: cover; 
+    background-position: center; 
+    background-repeat: no-repeat; 
     transition: opacity 1s ease-in-out;
 }
 
