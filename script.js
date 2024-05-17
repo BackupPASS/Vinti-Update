@@ -51,3 +51,4 @@ setTimeout(function() {
   setTimeout(showCookieNotice, 1000);
 
   document.cookie = "username=JohnDoe; path=/; secure; HttpOnly";
+
