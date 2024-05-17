@@ -7,12 +7,12 @@ body {
 
 @font-face {
     font-family: 'Alba';
-    src: url('ALBA____.ttf') format('truetype');
+    src: url('ALBA____.TTF') format('truetype');
   }
  
   @font-face {
     font-family: 'Albas';
-    src: url('ALBAS___.ttf') format('truetype');
+    src: url('ALBAS___.TTF') format('truetype');
   }
 .container {
     max-width: 1200px;
