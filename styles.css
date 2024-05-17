@@ -3,10 +3,17 @@ body {
     margin: 0;
     padding: 0;
     background-color: #f4f4f4;
-
-
 }
 
+@font-face {
+    font-family: 'Alba';
+    src: url('ALBA____.ttf') format('truetype');
+  }
+ 
+  @font-face {
+    font-family: 'Albas';
+    src: url('ALBAS___.ttf') format('truetype');
+  }
 .container {
     max-width: 1200px;
     margin: 0 auto;
@@ -25,7 +32,7 @@ body {
 }
 
 .headertxt{
-    margin-top: 10%;
+    margin-top: 7%;
     font-size: 30px;
     transition: all 0.3s ease;
     color: #fff;
@@ -41,7 +48,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+    margin-top: 32px;
     padding-bottom: 50px;
     
 }
