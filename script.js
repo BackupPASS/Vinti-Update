@@ -69,13 +69,12 @@ setTimeout(function() {
     const siriBall = document.getElementById('siri-ball');
     const chatBox = document.getElementById('chat-box');
     const popup = document.getElementById('popup'); // Reference to the popup
-    const body = document.body;
-
+    const body = document.body; // Reference to the body element
     let recognition;
     let isRecognizing = false;
     let isTypingMode = false;
+    let pulsateBorder;
     let typingTimer;
-    let pulseInterval;
 
     const aiResponses = {
     "hello": "Hello! How can I help you today?",
@@ -104,7 +103,6 @@ setTimeout(function() {
     "set a reminder": "I can't do that sorry.",
     "create a note": "I can't do that sorry.",
     "What is 2+2": "ThI recommend Disney+ for movies, a subscription is reqired",
-    "buy [item]": "Your purchase of [item] is complete.",
 "what's trending": "Trending topics are Tiktok, Instagram and the UK general election.",
 "play a game": "Launching game...",
     "give me a compliment": "You're awesome!",
@@ -127,149 +125,156 @@ setTimeout(function() {
 "tell me a riddle": "I speak without a mouth and hear without ears. I have no body, but I come alive with the wind. What am I?",
 };
 
-
-    // Function to show the popup
-    function showPopup() {
-      popup.style.display = 'flex'; // Display the popup
-  }
-
-  // Function to close the popup
-  function closePopup() {
-      popup.style.display = 'none'; // Hide the popup
-  }
-
-  // Function to create and start pulsating border
-  function startPulsate() {
-      pulsateBorder = document.createElement('div');
-      pulsateBorder.classList.add('pulsate-border');
-      body.appendChild(pulsateBorder);
-  }
-
-  // Function to stop and remove pulsating border
-  function stopPulsate() {
-      if (pulsateBorder && pulsateBorder.parentNode) {
-          pulsateBorder.parentNode.removeChild(pulsateBorder);
+function getAIResponse(userInput) {
+  userInput = userInput.toLowerCase().trim();
+  for (let key in aiResponses) {
+      if (userInput.includes(key)) {
+          return aiResponses[key];
       }
   }
+  return "I'm not sure how to respond to that. Can you ask something else?";
+}
 
-  // Initialize speech recognition if supported
-  if ('webkitSpeechRecognition' in window) {
-      recognition = new webkitSpeechRecognition();
-      recognition.continuous = true;
-      recognition.interimResults = true;
-      recognition.lang = 'en-US';
+// Function to show the popup
+function showPopup() {
+  popup.style.display = 'flex'; // Display the popup
+}
 
-      recognition.onstart = () => {
-          isRecognizing = true;
-          siriBall.classList.add('active', 'spin'); // Add spin animation class to AI ball
-          startPulsate(); // Start pulsating when recognition starts
-          // Optionally clear chatBox content when speech recognition starts
-          chatBox.textContent = "";
-      };
+// Function to close the popup
+function closePopup() {
+  popup.style.display = 'none'; // Hide the popup
+}
 
-      recognition.onend = () => {
-          isRecognizing = false;
-          siriBall.classList.remove('active', 'spin'); // Remove spin animation class from AI ball
-          stopPulsate(); // Stop pulsating when recognition stops
-          if (!isTypingMode) chatBox.style.display = 'none';
-          processFinalTranscript(); // Process final transcript after speech ends
-      };
+function startPulsate() {
+  pulsateBorder = document.createElement('div');
+  pulsateBorder.classList.add('pulsate-border');
+  body.appendChild(pulsateBorder);
+}
 
-      
-
-      recognition.onresult = (event) => {
-          let finalTranscript = '';
-          for (let i = event.resultIndex; i < event.results.length; ++i) {
-              if (event.results[i].isFinal) {
-                  finalTranscript += event.results[i][0].transcript;
-              }
-          }
-          chatBox.textContent = finalTranscript;
-          if (finalTranscript.trim() !== '') {
-              const aiResponse = getAIResponse(finalTranscript);
-              setTimeout(() => {
-                  chatBox.style.opacity = 0;
-                  setTimeout(() => {
-                      chatBox.style.opacity = 1;
-                      chatBox.textContent = aiResponse;
-                  }, 500);
-              }, 1000);
-          }
-      };
+// Function to stop and remove pulsating border
+function stopPulsate() {
+  if (pulsateBorder && pulsateBorder.parentNode) {
+      pulsateBorder.parentNode.removeChild(pulsateBorder);
   }
+}
+// Initialize speech recognition if supported
+if ('webkitSpeechRecognition' in window) {
+  recognition = new webkitSpeechRecognition();
+  recognition.continuous = true;
+  recognition.interimResults = true;
+  recognition.lang = 'en-US';
 
-  // Event listener for siriBall double-click to enable typing mode
-  siriBall.addEventListener('dblclick', () => {
-      isTypingMode = true;
-      chatBox.style.display = 'block';
-      chatBox.innerHTML = '<textarea id="chat-input" rows="3" cols="30"></textarea>';
-      const chatInput = document.getElementById('chat-input');
-      chatInput.focus();
+  recognition.onstart = () => {
+    isRecognizing = true;
+    siriBall.classList.add('active', 'spin'); // Add spin animation class to AI ball
+    startPulsate(); // Start pulsating when recognition starts
+    // Optionally clear chatBox content when speech recognition starts
+    chatBox.textContent = "";
+};
 
-      chatInput.addEventListener('keypress', (event) => {
-          if (event.key === 'Enter') {
-              event.preventDefault();
-              const userInput = chatInput.value.trim();
-              if (userInput) {
-                  chatBox.innerHTML = `<p>${userInput}</p>`;
-                  const aiResponse = getAIResponse(userInput);
-                  setTimeout(() => {
-                      chatBox.style.opacity = 0;
-                      setTimeout(() => {
-                          chatBox.style.opacity = 1;
-                          chatBox.innerHTML = `<p>${aiResponse}</p>`;
-                      }, 1000);
-                  }, 2000);
-              }
-          } else {
-              clearTimeout(typingTimer); // Reset typing timer
-              typingTimer = setTimeout(() => {
-                  isTypingMode = false; // Return to listening mode after 3 seconds of inactivity
-                  recognition.start(); // Restart recognition
-              }, 3000);
+recognition.onend = () => {
+    isRecognizing = false;
+    siriBall.classList.remove('active', 'spin'); // Remove spin animation class from AI ball
+    stopPulsate(); // Stop pulsating when recognition stops
+    if (!isTypingMode) chatBox.style.display = 'none';
+    processFinalTranscript(); // Process final transcript after speech ends
+};
+
+
+  recognition.onresult = (event) => {
+      let finalTranscript = '';
+      for (let i = event.resultIndex; i < event.results.length; ++i) {
+          if (event.results[i].isFinal) {
+              finalTranscript += event.results[i][0].transcript;
           }
-      });
-  });
-
-  // Event listener for siriBall click to toggle recognition
-  siriBall.addEventListener('click', () => {
-      if (isRecognizing) {
-          recognition.stop();
-      } else {
-          recognition.start();
       }
-  });
-
-  // Event listener for toggleChatbotButton to toggle chat container visibility and show popup
-  toggleChatbotButton.addEventListener('click', () => {
-      if (chatContainer.style.display === 'none' || chatContainer.style.display === '') {
-          chatContainer.style.display = 'flex';
-          toggleChatbotButton.textContent = 'Close Instonomo AI';
-          showPopup(); // Show the popup when clicking the button
-          startPulsate(); // Start pulsating when chatbot is open
-      } else {
-          chatContainer.style.display = 'none';
-          toggleChatbotButton.textContent = 'Instonomo AI';
-          closePopup(); // Close the popup when hiding the chatbot
-          stopPulsate(); // Stop pulsating when chatbot is closed
-      }
-  });
-
-  // Function to process final transcript after speech recognition ends
-  function processFinalTranscript() {
-      const finalText = chatBox.textContent.trim();
-      if (finalText !== '') {
-          const aiResponse = getAIResponse(finalText);
+      chatBox.textContent = finalTranscript;
+      if (finalTranscript.trim() !== '') {
+          const aiResponse = getAIResponse(finalTranscript);
           setTimeout(() => {
               chatBox.style.opacity = 0;
               setTimeout(() => {
                   chatBox.style.opacity = 1;
                   chatBox.textContent = aiResponse;
-              }, 500);
-          }, 1000);
+              }, 1000);
+          }, 2000);
       }
-  }
+  };
+}
 
-  // Event listener for popup close button
-  document.getElementById('close-popup').addEventListener('click', closePopup);
+// Event listener for siriBall double-click to enable typing mode
+siriBall.addEventListener('dblclick', () => {
+  isTypingMode = true;
+  chatBox.style.display = 'block';
+  chatBox.innerHTML = '<textarea id="chat-input" rows="3" cols="30"></textarea>';
+  const chatInput = document.getElementById('chat-input');
+  chatInput.focus();
+
+  chatInput.addEventListener('keypress', (event) => {
+      if (event.key === 'Enter') {
+          event.preventDefault();
+          const userInput = chatInput.value.trim();
+          if (userInput) {
+              chatBox.innerHTML = `<p>${userInput}</p>`;
+              const aiResponse = getAIResponse(userInput);
+              setTimeout(() => {
+                  chatBox.style.opacity = 0;
+                  setTimeout(() => {
+                      chatBox.style.opacity = 1;
+                      chatBox.innerHTML = `<p>${aiResponse}</p>`;
+                  }, 1000);
+              }, 2000);
+          }
+      } else {
+          clearTimeout(typingTimer); // Reset typing timer
+          typingTimer = setTimeout(() => {
+              isTypingMode = false; // Return to listening mode after 3 seconds of inactivity
+              recognition.start(); // Restart recognition
+          }, 3000);
+      }
+  });
+});
+
+// Event listener for siriBall click to toggle recognition
+siriBall.addEventListener('click', () => {
+  if (isRecognizing) {
+      recognition.stop();
+  } else {
+      recognition.start();
+  }
+});
+
+// Event listener for toggleChatbotButton to toggle chat container visibility and show popup
+toggleChatbotButton.addEventListener('click', () => {
+  if (chatContainer.style.display === 'none' || chatContainer.style.display === '') {
+      chatContainer.style.display = 'flex';
+      toggleChatbotButton.textContent = 'Close Instonomo AI';
+      showPopup(); // Show the popup when clicking the button
+      startPulsate(); // Start pulsating when chatbot is open
+  } else {
+      chatContainer.style.display = 'none';
+      toggleChatbotButton.textContent = 'Instonomo AI';
+      closePopup(); // Close the popup when hiding the chatbot
+      stopPulsate(); // Stop pulsating when chatbot is closed
+  }
+});
+
+// Function to process final transcript after speech recognition ends
+function processFinalTranscript() {
+  const finalText = chatBox.textContent.trim();
+  if (finalText !== '') {
+      const aiResponse = getAIResponse(finalText);
+      setTimeout(() => {
+          chatBox.style.opacity = 0;
+          setTimeout(() => {
+              chatBox.style.opacity = 1;
+              chatBox.textContent = aiResponse;
+          }, 500);
+      }, 1000);
+  }
+}
+
+
+// Event listener for popup close button
+document.getElementById('close-popup').addEventListener('click', closePopup);
 });
