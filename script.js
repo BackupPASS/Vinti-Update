@@ -175,6 +175,8 @@ setTimeout(function() {
           processFinalTranscript(); // Process final transcript after speech ends
       };
 
+      
+
       recognition.onresult = (event) => {
           let finalTranscript = '';
           for (let i = event.resultIndex; i < event.results.length; ++i) {
@@ -190,8 +192,8 @@ setTimeout(function() {
                   setTimeout(() => {
                       chatBox.style.opacity = 1;
                       chatBox.textContent = aiResponse;
-                  }, 1000);
-              }, 2000);
+                  }, 500);
+              }, 1000);
           }
       };
   }
