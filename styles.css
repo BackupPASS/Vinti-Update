@@ -302,3 +302,114 @@ color: #ffffff;
   }
 
 
+  body {
+    font-family: Arial, sans-serif;
+}
+
+
+.chat-container {
+  position: fixed;
+  bottom: 80px;
+  left: 20px;
+  display: flex;
+  align-items: center;
+  display: none;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.chat-box {
+  background-color: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 16px;
+  padding: 15px;
+  max-width: 300px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-size: 14px;
+  line-height: 1.4;
+  color: #333;
+  animation: fadeIn 0.3s ease;
+}
+
+.chat-box p {
+  margin: 0;
+}
+
+.siri-ball {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  animation: fadeIn 0.3s ease;
+  background: radial-gradient(circle at 20% 30%, rgb(0, 255, 255), transparent 80%),
+              radial-gradient(circle at 80% 70%, blue, transparent 80%),
+              radial-gradient(circle at 40% 60%, rgb(77, 11, 107), transparent 40%);
+  filter: blur(3px);
+  transition: transform 0.1s ease-in-out, width 0.1s ease-in-out, height 0.1s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
+}
+
+@keyframes siriGlow {
+  from {
+      box-shadow: 0 0 20px rgba(0, 122, 255, 0.6);
+  }
+  to {
+      box-shadow: 0 0 40px rgba(0, 122, 255, 1);
+  }
+}
+
+.siri-ball.active {
+  box-shadow: 0 0 40px rgba(0, 122, 255, 1);
+  transform: scale(1.2); /* Example: Increase size when active */
+}
+
+.siri-ball.spin {
+  animation: spin 1s infinite linear;
+}
+
+@keyframes spin {
+  from {
+      transform: rotate(0deg);
+  }
+  to {
+      transform: rotate(360deg);
+  }
+}
+
+
+.siri-ball.active::before {
+  box-shadow: 0 0 40px rgba(0, 122, 255, 1);
+}
+
+textarea#chat-input {
+  width: 90%;
+  height: 90%;
+  padding: 3px;
+  border-radius: 15px;
+  border: 0.5px solid #e0e0e0;
+  font-size: 12px;
+  line-height: 1.4;
+  margin-top: 5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  resize: none;
+}
+
+textarea#chat-input:focus {
+  outline: none;
+  border-color: #007aff;
+  box-shadow: 0 0 8px rgba(0, 122, 255, 0.6);
+}
