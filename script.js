@@ -53,7 +53,8 @@ setTimeout(function() {
   document.cookie = "username=JohnDoe; path=/; secure; HttpOnly";
 
 
-
+        const authCode = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw6b';
+        console.log(authCode); 
 
 
 
