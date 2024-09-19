@@ -3,6 +3,10 @@ body {
   margin: 0;
   padding: 0;
   background-color: #f4f4f4;
+  background-image: url('image2.jpg');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
 }
 
 @font-face {
@@ -151,7 +155,6 @@ color: #ffffff;
 }
 
 
-
 #background-slideshow {
   position: fixed;
   top: 0;
@@ -160,10 +163,10 @@ color: #ffffff;
   height: 100%;
   z-index: -1;
   background-size: cover;
-  background-position: center;
+  background-position: center; 
+  background-repeat: no-repeat; 
   transition: opacity 1s ease-in-out;
 }
-
 
 
 
